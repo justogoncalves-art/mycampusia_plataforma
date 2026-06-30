@@ -46,6 +46,10 @@ idioma **ES/EN**, usuario y ajustes.
   **Contactar con la universidad**.
 - **Carreras** — buscador + 10 programas; cada uno abre **¿Qué es? · ¿Qué hace un alumno? ·
   Salidas profesionales · Competencias** y salta a las universidades que lo imparten.
+- **Estudios Posibles (estudiar en el extranjero)** — bloque en la landing y botón en el banner
+  superior; abre un formulario (nombre, país de origen, colegio, país de destino, año proyectado)
+  con el **20 % de descuento** de usuario My Path. También accesible desde cada universidad con
+  el botón *Quiero estudiar aquí*.
 - **Comparador** — hasta 4 **universidades o carreras** dato a dato, resaltando el mejor valor.
 - **Test vocacional Mento.IA** — popup de bienvenida, detalle (7 capítulos · 50 min · 15 u$s)
   y flujo *Pagar y continuar* → confirmación.

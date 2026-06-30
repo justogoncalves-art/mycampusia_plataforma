@@ -178,6 +178,8 @@ input[type=range]{width:100%;accent-color:var(--forest)}
 @media(max-width:680px){
   .grid2{grid-template-columns:1fr}
   .grid3{grid-template-columns:1fr}
+  .epblock{grid-template-columns:1fr!important}
+  .epblock>div:last-child{min-height:160px}
   .grid4{grid-template-columns:repeat(2,1fr)}
   .h1{font-size:34px!important}
   .ov{padding:0;align-items:flex-end}
@@ -303,9 +305,9 @@ const TOPPROGS=[
 ];
 const QUOTES={landing:{t:'La raíz de la educación es amarga, pero sus frutos son dulces.',a:'Aristóteles'},riasec:{t:'La educación no consiste en llenar un cubo, sino en encender un fuego.',a:'William B. Yeats'}};
 const T={
- ES:{greet:'Bienvenida',sub:'Encontremos juntos el próximo paso de tu vida académica.',mento:'Ver resultados de Mento.IA',stats:'Estadísticas del mundo',test:'Hacer test vocacional',settings:'Ajustes',
+ ES:{greet:'Bienvenida',sub:'Encontremos juntos el próximo paso de tu vida académica.',mento:'Ver resultados de Mento.IA',stats:'Estadísticas del mundo',test:'Hacer test vocacional',abroad:'Estudiar en el extranjero',settings:'Ajustes',
    cRiT:'Tu Afinidad RIASEC',cRiD:'Las carreras que mejor encajan con tu perfil Mento.IA',cUnT:'Buscar por universidad',cUnD:'Explora 1.100+ universidades en 22 países',cPrT:'Buscar por programa',cPrD:'25.000+ programas filtrados por lo que te importa',cCpT:'Comparador',cCpD:'Enfrenta universidades y carreras dato a dato',explore:'Explorar',resultados:'resultados'},
- EN:{greet:'Welcome',sub:'Let us find the next step of your academic life together.',mento:'View Mento.IA results',stats:'World statistics',test:'Take vocational test',settings:'Settings',
+ EN:{greet:'Welcome',sub:'Let us find the next step of your academic life together.',mento:'View Mento.IA results',stats:'World statistics',test:'Take vocational test',abroad:'Study abroad',settings:'Settings',
    cRiT:'Your RIASEC Affinity',cRiD:'The degrees that best match your Mento.IA profile',cUnT:'Search by university',cUnD:'Explore 1,100+ universities across 22 countries',cPrT:'Search by program',cPrD:'25,000+ programs filtered by what matters to you',cCpT:'Comparator',cCpD:'Pit universities and degrees against each other, fact by fact',explore:'Explore',resultados:'results'}
 };
 
@@ -318,6 +320,7 @@ let S={
  programFilter:null,programQuery:'',programOpen:null,
  statsOpen:false,settingsOpen:false,testOpen:false,testPaid:false,
  contactOpen:false,contactSent:false,
+ abroadOpen:false,abroadSent:false,
  chatOpen:false,chatMsgs:[{role:'bot',text:'¡Hola Martina! Soy Mento, tu asistente de My Campus.IA. Puedo ayudarte con tu perfil RIASEC, universidades, costes de vida, becas y comparativas. ¿Por dónde empezamos?'}],
  cmpMode:'universidades',cmpUnis:['u2','u3','u9'],cmpProgs:['u2p3','u3p4','u9p1']
 };
@@ -353,6 +356,7 @@ function header(){const l=L();return `
    <button class="btn btn-sm btn-sand" onclick="App.nav('riasec')">${l.mento}</button>
    <button class="btn btn-sm btn-out-d" onclick="App.openStats()">${l.stats}</button>
    <button class="btn btn-sm btn-out-d btn-test" onclick="App.openTest()">${l.test}</button>
+   <button class="btn btn-sm btn-out-d btn-test" onclick="App.openAbroad()">${l.abroad}</button>
  </div>
  <div class="hdr-right">
    <div class="lang" onclick="App.toggleLang()" title="Idioma / Language">
@@ -384,7 +388,18 @@ function vLanding(){const l=L();const card=(act,no,ico,tt,ds)=>`
    ${card('programs','03','<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>',l.cPrT,l.cPrD)}
    ${card('comparator','04','<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',l.cCpT,l.cCpD)}
  </div>
- <div class="card premium" style="margin-top:24px;padding:44px;position:relative;overflow:hidden;border-radius:20px">
+ <div class="card premium epblock" style="margin-top:20px;padding:0;position:relative;overflow:hidden;border-radius:20px;display:grid;grid-template-columns:1.4fr 1fr">
+   <div class="topbar" style="position:absolute;top:0;left:0;right:0"></div>
+   <div style="padding:38px 40px">
+     <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px"><span style="font-family:var(--fm);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sand-300)">ESTUDIOS POSIBLES · MY PATH.IA</span><span style="font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:.04em;color:var(--charcoal-900);background:var(--sand-300);padding:4px 10px;border-radius:999px">20% OFF</span></div>
+     <h2 style="font-family:var(--fd);font-weight:700;font-size:34px;line-height:1.1;color:var(--cream-100);margin:0 0 14px;max-width:18ch">Estudios Posibles</h2>
+     <p style="margin:0 0 8px;font-size:16px;line-height:1.6;color:var(--on-dark);max-width:50ch">¿Te interesa estudiar en el extranjero? Estudios Posibles y My Path.IA lo hacen posible.</p>
+     <p style="margin:0 0 26px;font-size:16px;line-height:1.6;color:var(--on-dark-muted);max-width:50ch">Por ser usuario de My Path tienes un <strong style="color:var(--sand-300)">20% de descuento</strong>. Demos juntos ese paso.</p>
+     <button class="btn btn-lg btn-sand" onclick="App.openAbroad()">Completar el formulario  →</button>
+   </div>
+   <div style="position:relative;overflow:hidden"><img src="assets/campus/students.jpg" alt="Estudiar en el extranjero" style="width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:0;background:linear-gradient(110deg,rgba(11,61,46,.75) 0%,rgba(11,61,46,.1) 60%)"></div></div>
+ </div>
+ <div class="card premium" style="margin-top:20px;padding:44px;position:relative;overflow:hidden;border-radius:20px">
    <div class="topbar" style="position:absolute;top:0;left:0"></div>
    <div style="font-family:var(--fm);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--on-dark-muted);margin-bottom:18px">FILOSOFÍA · MY CAMPUS.IA</div>
    <div style="font-family:var(--fd);font-weight:500;font-size:33px;line-height:1.25;max-width:24ch">“${QUOTES.landing.t}”</div>
@@ -544,6 +559,7 @@ function vDetail(){
        <div style="margin-top:10px;text-align:center;font-family:var(--fm);font-size:11px;letter-spacing:.08em;color:var(--muted)">ÍNDICE DE VIDA: ${u.vida.indice}</div>
      </div>
      <button class="btn btn-md btn-primary btn-full" onclick="App.openContact()">Contactar con la universidad</button>
+     <button class="btn btn-md btn-out btn-full" style="margin-top:10px" onclick="App.openAbroad()">Quiero estudiar aquí</button>
    </div>
  </div>
 </section>`;}
@@ -626,6 +642,7 @@ function overlays(){let h='';
  if(S.testOpen)h+=mTest();
  if(S.programOpen!=null)h+=mProgram();
  if(S.contactOpen)h+=mContact();
+ if(S.abroadOpen)h+=mAbroad();
  if(S.settingsOpen)h+=mSettings();
  h+=chatbot();
  return h;}
@@ -692,6 +709,30 @@ function mContact(){const u=UNIS.find(x=>x.id===S.selUni);const nm=u?u.nombre:''
    <div style="margin-top:22px"><button class="btn btn-md btn-primary btn-full" onclick="App.sendContact()">Enviar solicitud</button></div>
   </div>`;
  return `<div class="ov" onclick="App.closeContact()"><div class="modal" style="width:min(520px,100%)" onclick="event.stopPropagation()"><div class="topbar"></div>${body}</div></div>`;}
+function mAbroad(){const f=(lab,id,ph,type)=>`<label style="display:flex;flex-direction:column;gap:6px"><span style="font-weight:600;font-size:14px;color:var(--text)">${lab}</span><input id="${id}" type="${type||'text'}" placeholder="${ph}" style="height:46px;padding:0 14px;border:1px solid var(--line-strong);border-radius:12px;background:var(--surface);font-family:var(--fs);font-size:16px;color:var(--text);outline:none"></label>`;
+ const body=S.abroadSent?`
+  <div style="padding:44px 40px;text-align:center"><div style="width:62px;height:62px;border-radius:999px;background:rgba(203,191,166,.18);display:flex;align-items:center;justify-content:center;margin:0 auto 20px"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--sand-300)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+   <div style="font-family:var(--fd);font-weight:700;font-size:30px;color:var(--cream-100);margin-bottom:10px">¡Estamos en marcha!</div>
+   <p style="margin:0 auto 28px;font-size:16px;line-height:1.55;color:var(--on-dark);max-width:42ch">Recibimos tu solicitud, ${esc(S.userName)}. Un asesor de Estudios Posibles · My Path.IA te contactará para diseñar tu plan de estudios en el extranjero con tu <strong style="color:var(--sand-300)">20% de descuento</strong> aplicado.</p>
+   <button class="btn btn-lg btn-sand" onclick="App.closeAbroad()">Listo</button></div>`:`
+  <div style="padding:36px 40px">
+   <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:8px">
+     <div style="display:flex;align-items:center;gap:10px"><span style="font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sand-300)">ESTUDIOS POSIBLES · MY PATH.IA</span><span style="font-family:var(--fm);font-size:11px;font-weight:500;color:var(--charcoal-900);background:var(--sand-300);padding:4px 10px;border-radius:999px">20% OFF</span></div>
+     <div class="x x-d" onclick="App.closeAbroad()">✕</div>
+   </div>
+   <h2 style="margin:0 0 8px;font-family:var(--fd);font-weight:700;font-size:30px;line-height:1.12;color:var(--cream-100)">Estudiar en el extranjero</h2>
+   <p style="margin:0 0 24px;font-size:15px;line-height:1.55;color:var(--on-dark-muted);max-width:48ch">Cuéntanos lo esencial y diseñamos contigo el camino. Demos juntos ese paso.</p>
+   <div style="display:flex;flex-direction:column;gap:14px">
+     ${f('Nombre y apellido','ab_nom','Tu nombre completo')}
+     ${f('País de origen','ab_origen','Ej. Argentina')}
+     ${f('Colegio','ab_colegio','Nombre de tu colegio')}
+     ${f('País donde quieres estudiar','ab_destino','Ej. España')}
+     ${f('Año proyectado para comenzar','ab_anio','Ej. 2027','number')}
+   </div>
+   <div style="margin-top:24px"><button class="btn btn-lg btn-sand btn-full" onclick="App.sendAbroad()">Completar el formulario  →</button></div>
+   <div style="margin-top:12px;text-align:center;font-size:11px;line-height:1.4;color:var(--on-dark-muted)">Tu 20% de descuento de usuario My Path se aplica automáticamente</div>
+  </div>`;
+ return `<div class="ov" style="z-index:88" onclick="App.closeAbroad()"><div class="modal modal-d" style="width:min(560px,100%)" onclick="event.stopPropagation()"><div class="topbar"></div>${body}</div></div>`;}
 function chatbot(){let panel='';
  if(S.chatOpen){
    const msgs=S.chatMsgs.map(m=>`<div class="msg ${m.role==='me'||m.role==='user'?'me':'bot'}">${esc(m.text)}</div>`).join('');
@@ -724,7 +765,7 @@ function botAnswer(text){const t=(text||'').toLowerCase();
 
 /* ============================ APP / ACTIONS ============================ */
 const App={
- nav(v){S.view=v;S.statsOpen=S.settingsOpen=S.testOpen=S.contactOpen=false;S.programOpen=null;window.scrollTo(0,0);render();},
+ nav(v){S.view=v;S.statsOpen=S.settingsOpen=S.testOpen=S.contactOpen=S.abroadOpen=false;S.programOpen=null;window.scrollTo(0,0);render();},
  openUni(id){S.selUni=id;S.view='uniDetail';S.programOpen=null;S.contactOpen=false;window.scrollTo(0,0);render();},
  favUni(e,id){e.stopPropagation();const i=S.favU.indexOf(id);if(i>=0)S.favU.splice(i,1);else S.favU.push(id);saveFav();render();},
  toggleFavUniDetail(){const id=S.selUni;const i=S.favU.indexOf(id);if(i>=0)S.favU.splice(i,1);else S.favU.push(id);saveFav();render();},
@@ -747,6 +788,9 @@ const App={
  openContact(){S.contactOpen=true;S.contactSent=false;render();},
  closeContact(){S.contactOpen=false;render();},
  sendContact(){S.contactSent=true;render();},
+ openAbroad(){S.abroadOpen=true;S.abroadSent=false;S.statsOpen=S.testOpen=S.settingsOpen=false;render();},
+ closeAbroad(){S.abroadOpen=false;render();},
+ sendAbroad(){S.abroadSent=true;render();},
  cmpMode(m){S.cmpMode=m;render();},
  cmpToggle(id){const i=S.cmpUnis.indexOf(id);if(i>=0)S.cmpUnis.splice(i,1);else if(S.cmpUnis.length<4)S.cmpUnis.push(id);render();},
  toggleChat(){S.chatOpen=!S.chatOpen;render();if(S.chatOpen){const el=document.getElementById('chatInput');if(el)el.focus();}},
@@ -759,3 +803,13 @@ render();
 </script>
 </body>
 </html>
+
+<style id="__om-edit-overrides">
+#app .card >div:nth-child(3) { width: 540px !important }
+#app .card >div:nth-child(3) { width: 552px !important }
+#app .card >div:nth-child(3) { height: 133px !important }
+#app .card >div:nth-child(3) { width: 601px !important }
+#app .card >div:nth-child(3) { width: 10px !important }
+#app .card >div:nth-child(3) { width: 810px !important }
+#app .card >div:nth-child(3) { width: 10px !important }
+</style>
