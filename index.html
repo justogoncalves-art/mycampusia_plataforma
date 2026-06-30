@@ -178,8 +178,6 @@ input[type=range]{width:100%;accent-color:var(--forest)}
 @media(max-width:680px){
   .grid2{grid-template-columns:1fr}
   .grid3{grid-template-columns:1fr}
-  .epblock{grid-template-columns:1fr!important}
-  .epblock>div:last-child{min-height:160px}
   .grid4{grid-template-columns:repeat(2,1fr)}
   .h1{font-size:34px!important}
   .ov{padding:0;align-items:flex-end}
@@ -303,7 +301,7 @@ const TOPPROGS=[
  {nombre:'Ingeniería Mecánica',area:'Ingeniería',riasec:'IRC',dur:'2-3 años',sal:64000,demanda:'Alta',desc:'Diseño, análisis y fabricación de máquinas y sistemas mecánicos, de la automoción a la energía.',actividad:'Calculas fuerzas y materiales, modelas piezas en CAD, simulas su comportamiento y supervisas su fabricación y montaje.',salidas:['Ingeniero/a de diseño','Automoción','Energía y renovables','Robótica','Producción industrial'],skills:['CAD · simulación','Termodinámica','Materiales','Fabricación']},
  {nombre:'Diseño de Producto',area:'Arquitectura y Diseño',riasec:'AIE',dur:'2-4 años',sal:40000,demanda:'Media',desc:'Creación de objetos y experiencias útiles, deseables y viables, desde la idea hasta el producto final.',actividad:'Investigas usuarios, bocetas y prototipas, iteras con materiales y validas tus diseños con personas reales.',salidas:['Diseñador/a de producto','Diseño industrial','UX/UI','Innovación','Dirección creativa'],skills:['Prototipado','Investigación de usuario','Materiales','Estética']}
 ];
-const QUOTES={landing:{t:'La raíz de la educación es amarga, pero sus frutos son dulces.',a:'Aristóteles'},riasec:{t:'La educación no consiste en llenar un cubo, sino en encender un fuego.',a:'William B. Yeats'}};
+const QUOTES={landing:{t:'La educación es el arma más poderosa que puedes usar para cambiar el mundo.',a:'Nelson Mandela'},riasec:{t:'La educación no consiste en llenar un cubo, sino en encender un fuego.',a:'William B. Yeats'}};
 const T={
  ES:{greet:'Bienvenida',sub:'Encontremos juntos el próximo paso de tu vida académica.',mento:'Ver resultados de Mento.IA',stats:'Estadísticas del mundo',test:'Hacer test vocacional',abroad:'Estudiar en el extranjero',settings:'Ajustes',
    cRiT:'Tu Afinidad RIASEC',cRiD:'Las carreras que mejor encajan con tu perfil Mento.IA',cUnT:'Buscar por universidad',cUnD:'Explora 1.100+ universidades en 22 países',cPrT:'Buscar por programa',cPrD:'25.000+ programas filtrados por lo que te importa',cCpT:'Comparador',cCpD:'Enfrenta universidades y carreras dato a dato',explore:'Explorar',resultados:'resultados'},
@@ -388,21 +386,18 @@ function vLanding(){const l=L();const card=(act,no,ico,tt,ds)=>`
    ${card('programs','03','<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>',l.cPrT,l.cPrD)}
    ${card('comparator','04','<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',l.cCpT,l.cCpD)}
  </div>
- <div class="card premium epblock" style="margin-top:20px;padding:0;position:relative;overflow:hidden;border-radius:20px;display:grid;grid-template-columns:1.4fr 1fr">
-   <div class="topbar" style="position:absolute;top:0;left:0;right:0"></div>
-   <div style="padding:38px 40px">
-     <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px"><span style="font-family:var(--fm);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sand-300)">ESTUDIOS POSIBLES · MY PATH.IA</span><span style="font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:.04em;color:var(--charcoal-900);background:var(--sand-300);padding:4px 10px;border-radius:999px">20% OFF</span></div>
-     <h2 style="font-family:var(--fd);font-weight:700;font-size:34px;line-height:1.1;color:var(--cream-100);margin:0 0 14px;max-width:18ch">Estudios Posibles</h2>
-     <p style="margin:0 0 8px;font-size:16px;line-height:1.6;color:var(--on-dark);max-width:50ch">¿Te interesa estudiar en el extranjero? Estudios Posibles y My Path.IA lo hacen posible.</p>
-     <p style="margin:0 0 26px;font-size:16px;line-height:1.6;color:var(--on-dark-muted);max-width:50ch">Por ser usuario de My Path tienes un <strong style="color:var(--sand-300)">20% de descuento</strong>. Demos juntos ese paso.</p>
-     <button class="btn btn-lg btn-sand" onclick="App.openAbroad()">Completar el formulario  →</button>
-   </div>
-   <div style="position:relative;overflow:hidden"><img src="assets/campus/students.jpg" alt="Estudiar en el extranjero" style="width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:0;background:linear-gradient(110deg,rgba(11,61,46,.75) 0%,rgba(11,61,46,.1) 60%)"></div></div>
+ <div class="card premium" style="margin-top:20px;padding:38px 44px;position:relative;overflow:hidden;border-radius:20px">
+   <div class="topbar" style="position:absolute;top:0;left:0;right:0;z-index:2"></div>
+   <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px"><span style="font-family:var(--fm);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sand-300)">ESTUDIOS POSIBLES · MY PATH.IA</span><span style="font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:.04em;color:var(--charcoal-900);background:var(--sand-300);padding:4px 10px;border-radius:999px">20% OFF</span></div>
+   <h2 style="font-family:var(--fd);font-weight:700;font-size:34px;line-height:1.1;color:var(--cream-100);margin:0 0 14px;max-width:18ch">Estudios Posibles</h2>
+   <p style="margin:0 0 8px;font-size:16px;line-height:1.6;color:var(--on-dark);max-width:58ch">¿Te interesa estudiar en el extranjero? Estudios Posibles y My Path.IA lo hacen posible.</p>
+   <p style="margin:0 0 26px;font-size:16px;line-height:1.6;color:var(--on-dark-muted);max-width:58ch">Por ser usuario de My Path tienes un <strong style="color:var(--sand-300)">20% de descuento</strong>. Demos juntos ese paso.</p>
+   <button class="btn btn-lg btn-sand" onclick="App.openAbroad()">Completar el formulario  →</button>
  </div>
  <div class="card premium" style="margin-top:20px;padding:44px;position:relative;overflow:hidden;border-radius:20px">
    <div class="topbar" style="position:absolute;top:0;left:0"></div>
    <div style="font-family:var(--fm);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--on-dark-muted);margin-bottom:18px">FILOSOFÍA · MY CAMPUS.IA</div>
-   <div style="font-family:var(--fd);font-weight:500;font-size:33px;line-height:1.25;max-width:24ch">“${QUOTES.landing.t}”</div>
+   <div style="font-family:var(--fd);font-weight:500;font-size:30px;line-height:1.3;width:clamp(260px,60vw,720px)">“${QUOTES.landing.t}”</div>
    <div style="margin-top:20px;font-family:var(--fm);font-size:14px;letter-spacing:.1em;color:var(--sand-300)">— ${QUOTES.landing.a}</div>
  </div>
 </section>`;}
@@ -803,13 +798,3 @@ render();
 </script>
 </body>
 </html>
-
-<style id="__om-edit-overrides">
-#app .card >div:nth-child(3) { width: 540px !important }
-#app .card >div:nth-child(3) { width: 552px !important }
-#app .card >div:nth-child(3) { height: 133px !important }
-#app .card >div:nth-child(3) { width: 601px !important }
-#app .card >div:nth-child(3) { width: 10px !important }
-#app .card >div:nth-child(3) { width: 810px !important }
-#app .card >div:nth-child(3) { width: 10px !important }
-</style>
